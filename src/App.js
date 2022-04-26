@@ -1,23 +1,47 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import AddContact from './component/AddContact';
+import ContactList from './component/ContactList';
+import Header from './component/Header';
 
 function App() {
+  const [allContacts, setAllContacts] = useState([]);
+
+ 
+  const addContactHandler = (contact) => {
+    setAllContacts([...allContacts, {id:Math.ceil(Math.random()*100), ...contact}])
+  }
+  const deleteContactHandler = (id) => {
+    console.log("delete", id);
+    const filteredContact = allContacts.filter(c => c.id !== id);
+    setAllContacts(filteredContact)
+  }
+  const editContactHandler = (id) => {
+    console.log("edit",id)
+  }
+
+  // Local Storage:
+  // CDM : get data
+  // update : save data
+
+  useEffect(()=> {
+    const savedContacts = JSON.parse(localStorage.getItem("allContacts"));
+    if(savedContacts) setAllContacts(savedContacts)
+  }, [])
+
+  useEffect(()=>{
+    localStorage.setItem("allContacts", JSON.stringify(allContacts))
+  }, [allContacts]);
+
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <AddContact addContactHandler={addContactHandler}/>
+      <ContactList allContacts={allContacts} 
+                   deleteItem={deleteContactHandler}
+                   editItem={editContactHandler} />
     </div>
   );
 }
