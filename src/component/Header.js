@@ -1,7 +1,7 @@
 const Header = () => {
     return ( 
         <header>
-            Contact App
+            <h2>Contact App</h2>
         </header>
      );
 }

@@ -1,17 +1,20 @@
+import { Link } from "react-router-dom";
 import ContactItem from "./ContactItem";
 
-const ContactList = ({allContacts, editItem, deleteItem}) => {
+const ContactList = ({allContacts, deleteItem}) => {
    
     return ( 
         <div className="contactList">
+            <div>
+                <Link to="/add">
+                    <button>Add New contact</button>
+                </Link>
+            </div>
             {allContacts
                 ? allContacts.map((c) => 
                  <ContactItem 
                     key={c.id}
-                    name={c.name}
-                    email={c.email}
-                    id= {c.id}
-                    editItem={editItem}
+                    contact = {c}
                     deleteItem={deleteItem}
                 />
                 )
