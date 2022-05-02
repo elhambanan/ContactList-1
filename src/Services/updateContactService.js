@@ -1,5 +1,5 @@
 import http from "./httpService";
 
 export default function updateContact(id, data) {
-    return http.get(`/contacts/${id}`, data)
+    return http.put(`/contacts/${id}`, data)
 }

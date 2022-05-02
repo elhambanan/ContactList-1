@@ -9,7 +9,9 @@ const EditContact = ({editContactHandler}) => {
     // const {state} = useLocation();
     // const {contact} = state
 
-    const { id } = useParams(); 
+    const params = useParams(); 
+    console.log(params)
+    const id = params.id
     
     const navigate = useNavigate(); 
 
@@ -23,7 +25,7 @@ const EditContact = ({editContactHandler}) => {
             return
         }
         e.preventDefault();
-        editContactHandler(contact, id);
+        editContactHandler(contact, params.id);
         setContact({name:"", email:""});
         navigate("/")
 

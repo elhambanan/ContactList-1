@@ -27,9 +27,14 @@ function App() {
 
   const editContactHandler =  async (contact, id) => {
     // put : id => DB update
-    console.log(contact, id)
-    const {data} = await updateContact(contact, id)
-    console.log(data)
+    try {
+      await updateContact(id, contact);
+      const {data} = await getAllContacts();
+      setAllContacts(data);
+    } catch (error) {
+      
+    }
+
   };
 
   const deleteContactHandler = async (id) => {
